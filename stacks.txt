@@ -1,0 +1,191 @@
+--------------------------------------------- backend --------------------------------------------------------------
+
+Runtime:   Node.js
+
+Framework backend:  Express.js
+
+Base de datos:   MongoDB Atlas
+
+ODM: Mongoose 
+
+Autenticación:  JWT
+
+Password : byscriptjs
+
+Cors: cors
+
+Validaciones : express-validator
+
+desarrollo :nodemon
+
+testing : jest
+
+-------------------------------------------------- Modelo de Base de Datos --------------------------------------------------------
+User
+- name
+- email
+- password
+- role: "user" | "admin"
+
+Reservation
+- user
+- date
+- time
+- people
+- area: "interior" | "terraza"
+- status: "pendiente" | "confirmada" | "cancelada"
+
+MenuItem
+- name
+- description
+- price
+- category
+- image
+- available
+
+Review
+- user
+- rating
+- comment
+- createdAt
+
+--------------------------------------------------------- estructura ------------------------------------------------------------
+
+backend/
+│
+├── src/
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Reservation.js
+│   │   ├── MenuItem.js
+│   │   └── Review.js
+│   │
+│   ├── routes/
+│   │   ├── auth.routes.js
+│   │   ├── reservation.routes.js
+│   │   ├── menu.routes.js
+│   │   └── review.routes.js
+│   │
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   ├── reservation.controller.js
+│   │   ├── menu.controller.js
+│   │   └── review.controller.js
+│   │
+│   ├── middlewares/
+│   │   ├── authMiddleware.js
+│   │   └── adminMiddleware.js
+│   │
+│   ├── utils/
+│   │   └── generateToken.js
+│   │
+│   └── app.js
+│
+├── server.js
+├── .env
+├── package.json
+└── README.md
+
+------------------------------------------------ Front ----------------------------------------------------------------------
+
+
+
+
+Librería principal:  React.js
+
+Build Tool :   vite
+
+Rutas:  React Router
+
+Peticiones http:  Axios o fetch
+
+Datos del Servidor , : pudiera ser TanStack Query
+
+Estilos : bootstrapp
+
+Formularios:  React Hook Form
+
+Aletas: SweetAlert2 o React Toastify
+
+Api email : EmailJS
+
+Api clima :  Open-Meteo
+
+
+------------------------------------- Estructura -------------------------------------------------------------------------------
+
+
+frontend/
+│
+├── src/
+│   ├── assets/
+│   │
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ReservationCard.jsx
+│   │   ├── MenuCard.jsx
+│   │   └── ReviewCard.jsx
+│   │
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Login.jsx
+│   │   ├── Signup.jsx
+│   │   ├── Menu.jsx
+│   │   ├── Reserve.jsx
+│   │   ├── MyReservations.jsx
+│   │   ├── Reviews.jsx
+│   │   └── AdminDashboard.jsx
+│   │
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   │
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── reservationService.js
+│   │   ├── menuService.js
+│   │   ├── reviewService.js
+│   │   ├── emailService.js
+│   │   └── weatherService.js
+│   │
+│   ├── routes/
+│   │   ├── AppRouter.jsx
+│   │   ├── PrivateRoute.jsx
+│   │   └── AdminRoute.jsx
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── .env
+├── package.json
+└── README.md
+
+
+
+
+--------------------------------------------------------- Stack Final ------------------------------------------------
+
+
+Frontend:
+- React.js
+- Vite
+- React Router
+- Context API
+- Axios
+- Bootstrap o Tailwind CSS
+- EmailJS
+- Open-Meteo API
+
+Backend:
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT
+- bcryptjs
+- dotenv
+- cors
+

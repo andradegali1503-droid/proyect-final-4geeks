@@ -1,0 +1,15 @@
+## Planteamiento del problema
+
+Actualmente, muchos restaurantes pequeños y medianos continúan gestionando sus reservas de forma manual, ya sea por llamadas telefónicas, mensajes de WhatsApp, redes sociales o anotaciones internas. Aunque estos métodos pueden funcionar en momentos de baja demanda, suelen generar problemas cuando el volumen de clientes aumenta o cuando existen múltiples reservas para una misma fecha y hora.
+
+Uno de los principales inconvenientes es la falta de organización y centralización de la información. Las reservas pueden perderse, duplicarse o registrarse con datos incompletos. Además, el cliente no siempre recibe una confirmación clara de su reserva, lo que puede generar confusión, cancelaciones de último momento o una mala experiencia desde el primer contacto con el restaurante.
+
+Otro problema importante es que el cliente no cuenta con suficiente información al momento de reservar. Por ejemplo, si desea reservar en terraza, normalmente no tiene una referencia rápida sobre el clima previsto para ese día. Esto puede influir directamente en su decisión y en la planificación del restaurante.
+
+También existe una oportunidad de mejorar la experiencia digital del usuario. Muchos clientes prefieren realizar reservas de manera rápida desde una aplicación web, sin necesidad de llamar o esperar una respuesta manual. Además, les resulta útil poder consultar el menú, revisar opiniones de otros usuarios y gestionar sus propias reservas desde una misma plataforma.
+
+Desde el punto de vista del restaurante, contar con una herramienta digital permitiría administrar mejor las reservas, visualizar la información de los clientes, organizar la disponibilidad, gestionar el menú y revisar los comentarios recibidos. Esto ayudaría a reducir errores operativos, mejorar la comunicación con los clientes y ofrecer una imagen más profesional.
+
+Por esta razón, se plantea el desarrollo de una aplicación web de reserva de mesas para restaurante, que permita a los usuarios registrarse, iniciar sesión, consultar el menú, crear reservas, elegir entre mesa interior o terraza, recibir confirmación por correo electrónico y visualizar información del clima en caso de reservar en terraza. Asimismo, el sistema contará con un panel administrativo para que el restaurante pueda gestionar reservas, menú y comentarios.
+
+Como desarrollador, este proyecto busca resolver una necesidad real mediante una solución Full-Stack que integre frontend, backend, base de datos, autenticación de usuarios y consumo de APIs externas, como EmailJS para el envío de correos de confirmación y Open-Meteo para consultar el clima.
