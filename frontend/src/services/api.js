@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const baseUrlApi = (import.meta.env.VITE_API_URL || "https://proyect-final-4geeks.onrender.com").replace(/\/$/, "");
+const baseUrlFinal = baseUrlApi.endsWith("/api") ? baseUrlApi : `${baseUrlApi}/api`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api"
+  baseURL: baseUrlFinal
 });
 
 api.interceptors.request.use((config) => {
