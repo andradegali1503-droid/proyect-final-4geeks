@@ -48,6 +48,7 @@ function Menu() {
   const [mensaje, setMensaje] = useState("");
   const [idEditando, setIdEditando] = useState("");
   const [datosFormulario, setDatosFormulario] = useState(formularioInicial);
+  const [mostrarModal, setMostrarModal] = useState(false);
 
   const cargarMenu = async () => {
     try {
@@ -79,6 +80,13 @@ function Menu() {
     setDatosFormulario(formularioInicial);
   };
 
+  const abrirModalNuevo = () => {
+    limpiarFormulario();
+    setMensaje("");
+    setMensajeError("");
+    setMostrarModal(true);
+  };
+
   const cargarPlatoEnFormulario = (plato) => {
     setIdEditando(plato._id);
     setDatosFormulario({
@@ -89,6 +97,14 @@ function Menu() {
       image: plato.image || "",
       available: plato.available
     });
+    setMensaje("");
+    setMensajeError("");
+    setMostrarModal(true);
+  };
+
+  const cerrarModal = () => {
+    setMostrarModal(false);
+    limpiarFormulario();
   };
 
   const enviarFormulario = async (e) => {
@@ -110,7 +126,7 @@ function Menu() {
         setMensaje("Plato creado");
       }
 
-      limpiarFormulario();
+      cerrarModal();
       cargarMenu();
     } catch (error) {
       console.error("Error al guardar el plato:", error.response?.data || error.message);
@@ -154,10 +170,6 @@ function Menu() {
             Una carta sencilla, elegante y separada por secciones para que el usuario encuentre rápido lo que
             quiere y el admin pueda editar cada plato sin complicaciones.
           </p>
-          <div className="menu-portada__etiquetas">
-            <span className="estado-cine estado-cine--ok">Secciones editables</span>
-            <span className="estado-cine estado-cine--off">Estilo editorial</span>
-          </div>
         </div>
       </section>
 
@@ -169,103 +181,135 @@ function Menu() {
           <div className="menu-editor-admin__cabecera">
             <div>
               <p className="tarjeta-cine__eyebrow mb-1">Admin</p>
-              <h2 className="menu-editor-admin__titulo mb-0">{idEditando ? "Editar plato" : "Crear plato"}</h2>
+              <h2 className="menu-editor-admin__titulo mb-0">Gestionar platos</h2>
             </div>
             <p className="menu-editor-admin__texto mb-0">
-              El formulario sigue simple, pero ahora encaja mejor con el nuevo menú por secciones.
+              El editor se abre en una ventana emergente para que la página se vea más limpia.
             </p>
           </div>
 
-          <form onSubmit={enviarFormulario} className="menu-editor-admin__form">
-            <div className="menu-editor-admin__grid">
-              <label className="campo-cine">
-                <span>Nombre</span>
-                <input
-                  className="form-control"
-                  name="name"
-                  placeholder="Nombre del plato"
-                  value={datosFormulario.name}
-                  onChange={cambiarInput}
-                />
-              </label>
+          <div className="menu-editor-admin__acciones">
+            <button className="btn btn-dark" type="button" onClick={abrirModalNuevo}>
+              Nuevo plato
+            </button>
+            <button className="btn btn-outline-secondary" type="button" onClick={cargarMenu}>
+              Recargar menu
+            </button>
+          </div>
+        </section>
+      )}
 
-              <label className="campo-cine">
-                <span>Sección</span>
-                <select className="form-select" name="category" value={datosFormulario.category} onChange={cambiarInput}>
-                  {seccionesMenu.map((seccion) => (
-                    <option key={seccion.clave} value={seccion.clave}>
-                      {seccion.titulo}
-                    </option>
-                  ))}
-                </select>
-              </label>
+      {mostrarModal && esAdmin && (
+        <div className="menu-modal" role="dialog" aria-modal="true" aria-labelledby="menu-modal-titulo">
+          <div className="menu-modal__backdrop" onClick={cerrarModal}></div>
+          <div className="menu-modal__panel">
+            <div className="menu-modal__cabecera">
+              <div>
+                <p className="tarjeta-cine__eyebrow mb-1">Admin</p>
+                <h2 className="menu-modal__titulo mb-0" id="menu-modal-titulo">
+                  {idEditando ? "Editar plato" : "Crear plato"}
+                </h2>
+              </div>
 
-              <label className="campo-cine campo-cine--ancho">
-                <span>Descripción</span>
-                <textarea
-                  className="form-control"
-                  name="description"
-                  placeholder="Descripcion corta y clara"
-                  rows="3"
-                  value={datosFormulario.description}
-                  onChange={cambiarInput}
-                />
-              </label>
+              <button className="btn btn-cine-mini btn-cine-mini--danger" type="button" onClick={cerrarModal}>
+                Cerrar
+              </button>
+            </div>
 
-              <label className="campo-cine">
-                <span>Precio</span>
-                <input
-                  className="form-control"
-                  name="price"
-                  type="number"
-                  step="0.01"
-                  placeholder="Precio"
-                  value={datosFormulario.price}
-                  onChange={cambiarInput}
-                />
-              </label>
-
-              <label className="campo-cine">
-                <span>Imagen</span>
-                <input
-                  className="form-control"
-                  name="image"
-                  placeholder="URL de la imagen"
-                  value={datosFormulario.image}
-                  onChange={cambiarInput}
-                />
-              </label>
-
-              <label className="campo-cine campo-cine--check">
-                <span>Estado</span>
-                <div className="form-check menu-editor-admin__check">
+            <form onSubmit={enviarFormulario} className="menu-editor-admin__form menu-modal__form">
+              <div className="menu-editor-admin__grid">
+                <label className="campo-cine">
+                  <span>Nombre</span>
                   <input
-                    className="form-check-input"
-                    id="available"
-                    name="available"
-                    type="checkbox"
-                    checked={datosFormulario.available}
+                    className="form-control"
+                    name="name"
+                    placeholder="Nombre del plato"
+                    value={datosFormulario.name}
                     onChange={cambiarInput}
                   />
-                  <label className="form-check-label" htmlFor="available">
-                    Disponible
-                  </label>
-                </div>
-              </label>
-            </div>
+                </label>
 
-            <div className="menu-editor-admin__acciones">
-              <button className="btn btn-dark" type="submit">
-                {idEditando ? "Guardar cambios" : "Crear plato"}
-              </button>
-              {idEditando && (
-                <button className="btn btn-outline-secondary" type="button" onClick={limpiarFormulario}>
-                  Cancelar edicion
+                <label className="campo-cine">
+                  <span>Sección</span>
+                  <select
+                    className="form-select"
+                    name="category"
+                    value={datosFormulario.category}
+                    onChange={cambiarInput}
+                  >
+                    {seccionesMenu.map((seccion) => (
+                      <option key={seccion.clave} value={seccion.clave}>
+                        {seccion.titulo}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="campo-cine campo-cine--ancho">
+                  <span>Descripción</span>
+                  <textarea
+                    className="form-control"
+                    name="description"
+                    placeholder="Descripcion corta y clara"
+                    rows="3"
+                    value={datosFormulario.description}
+                    onChange={cambiarInput}
+                  />
+                </label>
+
+                <label className="campo-cine">
+                  <span>Precio</span>
+                  <input
+                    className="form-control"
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    placeholder="Precio"
+                    value={datosFormulario.price}
+                    onChange={cambiarInput}
+                  />
+                </label>
+
+                <label className="campo-cine">
+                  <span>Imagen</span>
+                  <input
+                    className="form-control"
+                    name="image"
+                    placeholder="URL de la imagen"
+                    value={datosFormulario.image}
+                    onChange={cambiarInput}
+                  />
+                </label>
+
+                <label className="campo-cine campo-cine--check">
+                  <span>Estado</span>
+                  <div className="form-check menu-editor-admin__check">
+                    <input
+                      className="form-check-input"
+                      id="available"
+                      name="available"
+                      type="checkbox"
+                      checked={datosFormulario.available}
+                      onChange={cambiarInput}
+                    />
+                    <label className="form-check-label" htmlFor="available">
+                      Disponible
+                    </label>
+                  </div>
+                </label>
+              </div>
+
+              <div className="menu-editor-admin__acciones">
+                <button className="btn btn-dark" type="submit">
+                  {idEditando ? "Guardar cambios" : "Crear plato"}
                 </button>
-              )}
-            </div>
-          </form>
-        </section>
+                <button className="btn btn-outline-secondary" type="button" onClick={cerrarModal}>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
       {platosPorSeccion.map((seccion) => (

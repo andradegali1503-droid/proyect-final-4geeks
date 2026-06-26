@@ -2,16 +2,18 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="home-cinema">
-      <section className="hero-cine">
+    <div className="home-cinema home-cinema--fullbleed">
+      <section className="hero-cine hero-cine--fullbleed">
         <div className="hero-cine__overlay"></div>
-        <div className="hero-cine__content">
-          <p className="hero-cine__eyebrow">Welcome to MesaClick</p>
-          <h1 className="hero-cine__title">The Finest Place for Traditional Cuisine</h1>
-          <p className="hero-cine__text">
-            Una experiencia elegante para reservar mesa, consultar el menu y vivir un ambiente
-            con sabor andaluz.
-          </p>
+        <div className="hero-cine__content hero-cine__content--wide">
+          <div className="hero-cine__marca">
+            <p className="hero-cine__eyebrow">Welcome to MesaClick</p>
+            <h1 className="hero-cine__title">The Finest Place for Traditional Cuisine</h1>
+            <p className="hero-cine__text">
+              Una experiencia elegante para reservar mesa, consultar el menu y vivir un ambiente
+              con sabor andaluz.
+            </p>
+          </div>
 
           <div className="hero-cine__actions">
             <Link className="btn btn-light btn-lg btn-cine-primary" to="/reservar">
@@ -30,7 +32,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="row g-4 mt-4">
+      <section className="home-cinema__contenido row g-4 mt-4">
         <div className="col-md-4">
           <div className="info-cine">
             <span className="info-cine__number">01</span>

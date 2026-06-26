@@ -26,10 +26,14 @@ function MenuCard({ plato, sePuedeEliminar, alEditar, alEliminar }) {
 
           {sePuedeEliminar && (
             <div className="menu-item-editorial__acciones">
-              <button className="btn btn-cine-mini" onClick={() => alEditar(plato)}>
+              <button className="btn btn-cine-mini" type="button" onClick={() => alEditar(plato)}>
                 Editar
               </button>
-              <button className="btn btn-cine-mini btn-cine-mini--danger" onClick={() => alEliminar(plato._id)}>
+              <button
+                className="btn btn-cine-mini btn-cine-mini--danger"
+                type="button"
+                onClick={() => alEliminar(plato._id)}
+              >
                 Eliminar
               </button>
             </div>

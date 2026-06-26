@@ -7,6 +7,7 @@
   --color-texto-suave: rgba(244, 238, 230, 0.72);
   --color-acento: #c8a26a;
   --color-acento-oscuro: #8c5a3c;
+  --altura-navbar: 78px;
 }
 
 body {
@@ -16,6 +17,7 @@ body {
     linear-gradient(180deg, #0d0c0b 0%, #161311 50%, #0c0b0a 100%);
   color: var(--color-texto);
   font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -32,14 +34,12 @@ a {
   color: white;
   border-radius: 24px;
   padding: 3rem;
-  box-shadow: 0 20px 50px rgba(61, 37, 27, 0.2);
 }
 
 .tarjeta-suave {
   background: var(--color-fondo-tarjeta);
   border: 1px solid var(--color-borde);
   border-radius: 20px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
   color: var(--color-texto);
 }
 
@@ -48,7 +48,6 @@ a {
   background: linear-gradient(180deg, rgba(25, 22, 20, 0.96), rgba(14, 13, 12, 0.96));
   border: 1px solid rgba(200, 162, 106, 0.16);
   border-radius: 22px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
   color: var(--color-texto);
   overflow: hidden;
 }
@@ -263,7 +262,6 @@ a {
   border-radius: 18px;
   background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(245, 236, 224, 0.96));
   color: #231913;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .admin-reserva-card__cabecera {
@@ -307,7 +305,6 @@ a {
   background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(245, 236, 224, 0.96));
   border: 1px solid rgba(140, 90, 60, 0.12);
   border-radius: 24px;
-  box-shadow: 0 16px 42px rgba(10, 8, 7, 0.14);
 }
 
 .menu-portada {
@@ -316,7 +313,6 @@ a {
   background: linear-gradient(180deg, rgba(255, 250, 244, 0.92), rgba(245, 236, 224, 0.92));
   color: #221912;
   border: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .menu-portada::before,
@@ -436,7 +432,6 @@ a {
   border-radius: 20px;
   background: rgba(255, 250, 244, 0.84);
   border: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .menu-item-editorial__media {
@@ -512,8 +507,12 @@ a {
 }
 
 .menu-editor-admin {
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(245, 236, 224, 0.96));
+  background: transparent;
   color: #221912;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  padding: 0;
 }
 
 .menu-editor-admin__cabecera {
@@ -570,7 +569,6 @@ a {
 .campo-cine .form-control:focus,
 .campo-cine .form-select:focus {
   border-color: rgba(140, 90, 60, 0.42);
-  box-shadow: 0 0 0 0.2rem rgba(140, 90, 60, 0.12);
 }
 
 .campo-cine--ancho {
@@ -599,13 +597,66 @@ a {
   margin-top: 1.25rem;
 }
 
+.menu-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.menu-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 7, 6, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.menu-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  border-radius: 22px;
+  border: 1px solid rgba(217, 176, 140, 0.2);
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.98), rgba(245, 236, 224, 0.98));
+}
+
+.menu-modal__cabecera {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.5rem 1.5rem 0.75rem;
+}
+
+.menu-modal__titulo {
+  color: #221912;
+  font-size: 1.6rem;
+}
+
+.menu-modal__form {
+  padding-bottom: 1.5rem;
+}
+
 .home-cinema {
-  min-height: calc(100vh - 180px);
+  min-height: calc(100vh - var(--altura-navbar));
+  width: 100%;
+}
+
+.home-cinema__contenido {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
 }
 
 .hero-cine {
   position: relative;
-  min-height: 72vh;
+  min-height: calc(100vh - var(--altura-navbar));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -616,8 +667,24 @@ a {
     linear-gradient(rgba(8, 8, 8, 0.52), rgba(8, 8, 8, 0.7)),
     url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80")
       center/cover no-repeat;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
   animation: aparecerHero 700ms ease-out both;
+}
+
+.hero-cine--fullbleed {
+  min-height: calc(100vh - var(--altura-navbar));
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: none;
+  background:
+    linear-gradient(rgba(8, 8, 8, 0.45), rgba(8, 8, 8, 0.72)),
+    url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=80")
+      center/cover no-repeat;
 }
 
 .hero-cine__overlay {
@@ -635,6 +702,19 @@ a {
   max-width: 840px;
   padding: 4rem 1.5rem;
   animation: subirTexto 900ms ease-out both;
+}
+
+.hero-cine__content--wide {
+  max-width: 1100px;
+  min-height: calc(100vh - var(--altura-navbar));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-cine__marca {
+  max-width: 820px;
 }
 
 .hero-cine__eyebrow {
@@ -721,7 +801,6 @@ a {
   border-radius: 18px;
   background: linear-gradient(180deg, rgba(28, 25, 23, 0.9), rgba(17, 16, 15, 0.95));
   border: 1px solid var(--color-borde);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
   transition: transform 180ms ease, border-color 180ms ease;
 }
 
@@ -753,6 +832,7 @@ a {
   background: rgba(11, 10, 9, 0.82);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: var(--altura-navbar);
 }
 
 .navbar-cine .nav-link,
@@ -819,9 +899,30 @@ a {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --altura-navbar: 68px;
+  }
+
+  .home-cinema {
+    margin-top: 0;
+  }
+
+  .home-cinema__contenido {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
   .hero-cine {
-    min-height: 66vh;
-    border-radius: 14px;
+    min-height: calc(100vh - var(--altura-navbar));
+    border-radius: 0;
+  }
+
+  .hero-cine--fullbleed {
+    min-height: calc(100vh - var(--altura-navbar));
+  }
+
+  .hero-cine__content--wide {
+    min-height: calc(100vh - var(--altura-navbar));
   }
 
   .hero-cine__title {
@@ -854,6 +955,25 @@ a {
 
   .menu-editor-admin__grid {
     grid-template-columns: 1fr;
+  }
+
+  .menu-modal {
+    padding: 0.5rem;
+  }
+
+  .menu-modal__panel {
+    max-height: calc(100vh - 1rem);
+    border-radius: 18px;
+  }
+
+  .menu-modal__cabecera {
+    padding: 1.1rem 1.1rem 0.75rem;
+  }
+
+  .menu-modal__form {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    padding-bottom: 1.1rem;
   }
 
   .fondo-admin {
