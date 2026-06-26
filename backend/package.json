@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "node ./node_modules/jest/bin/jest.js --runInBand",
-    "seed:menu": "node src/seeds/seedMenu.js"
+    "seed:menu": "node src/seeds/seedMenu.js",
+    "seed:reviews": "node src/seeds/seedReviews.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

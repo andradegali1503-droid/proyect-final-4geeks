@@ -42,8 +42,36 @@ const validacionEstadoReserva = [
     .withMessage("El estado debe ser pending, confirmed o cancelled")
 ];
 
+const validacionActualizarReserva = [
+  ...validacionIdReserva,
+  body("date")
+    .optional()
+    .isISO8601()
+    .withMessage("La fecha debe tener formato valido"),
+  body("time")
+    .optional()
+    .trim()
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
+    .withMessage("La hora debe usar el formato HH:MM"),
+  body("people")
+    .optional()
+    .isInt({ min: 1, max: 12 })
+    .withMessage("La cantidad de personas debe estar entre 1 y 12"),
+  body("area")
+    .optional()
+    .trim()
+    .isIn(areasValidas)
+    .withMessage("El area debe ser indoor o terrace"),
+  body("status")
+    .optional()
+    .trim()
+    .isIn(estadosValidos)
+    .withMessage("El estado debe ser pending, confirmed o cancelled"),
+];
+
 module.exports = {
   validacionCrearReserva,
   validacionIdReserva,
-  validacionEstadoReserva
+  validacionEstadoReserva,
+  validacionActualizarReserva
 };

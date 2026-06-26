@@ -1,36 +1,42 @@
 function MenuCard({ plato, sePuedeEliminar, alEditar, alEliminar }) {
   return (
-    <div className="card tarjeta-suave h-100 overflow-hidden">
-      <div className="contenedor-imagen-plato">
+    <article className="menu-item-editorial">
+      <div className="menu-item-editorial__media">
         {plato.image ? (
-          <img className="imagen-plato" src={plato.image} alt={plato.name} />
+          <img className="menu-item-editorial__imagen" src={plato.image} alt={plato.name} />
         ) : (
-          <div className="imagen-plato imagen-plato-vacia">MesaClick</div>
+          <div className="menu-item-editorial__vacio">MesaClick</div>
         )}
       </div>
-      <div className="card-body">
-        <span className="badge text-bg-dark mb-3">{plato.category}</span>
-        <h5 className="card-title">{plato.name}</h5>
-        <p className="card-text text-muted">{plato.description}</p>
-        <div className="d-flex justify-content-between align-items-center">
-          <strong>{plato.price} EUR</strong>
-          <span className={`badge ${plato.available ? "text-bg-success" : "text-bg-secondary"}`}>
-            {plato.available ? "Disponible" : "No disponible"}
-          </span>
+
+      <div className="menu-item-editorial__contenido">
+        <div className="d-flex justify-content-between align-items-start gap-3">
+          <div className="flex-grow-1">
+            <p className="menu-item-editorial__categoria mb-2">{plato.category}</p>
+            <h3 className="menu-item-editorial__titulo mb-2">{plato.name}</h3>
+            <p className="menu-item-editorial__texto mb-0">{plato.description}</p>
+          </div>
+          <strong className="menu-item-editorial__precio">{plato.price} EUR</strong>
         </div>
 
-        {sePuedeEliminar && (
-          <div className="d-flex gap-2 mt-3">
-            <button className="btn btn-outline-dark btn-sm" onClick={() => alEditar(plato)}>
-              Editar
-            </button>
-            <button className="btn btn-outline-danger btn-sm" onClick={() => alEliminar(plato._id)}>
-              Eliminar
-            </button>
-          </div>
-        )}
+        <div className="menu-item-editorial__pie">
+          <span className={`estado-cine ${plato.available ? "estado-cine--ok" : "estado-cine--off"}`}>
+            {plato.available ? "Disponible" : "No disponible"}
+          </span>
+
+          {sePuedeEliminar && (
+            <div className="menu-item-editorial__acciones">
+              <button className="btn btn-cine-mini" onClick={() => alEditar(plato)}>
+                Editar
+              </button>
+              <button className="btn btn-cine-mini btn-cine-mini--danger" onClick={() => alEliminar(plato._id)}>
+                Eliminar
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
 

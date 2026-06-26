@@ -4,7 +4,9 @@ const {
   getMyReservations,
   cancelMyReservation,
   getAllReservations,
-  updateReservationStatus
+  updateReservationStatus,
+  updateReservation,
+  deleteReservation
 } = require("../controllers/reservation.controller");
 const protect = require("../middlewares/authMiddleware");
 const adminOnly = require("../middlewares/adminMiddleware");
@@ -12,7 +14,8 @@ const manejarErroresValidacion = require("../middlewares/validateMiddleware");
 const {
   validacionCrearReserva,
   validacionIdReserva,
-  validacionEstadoReserva
+  validacionEstadoReserva,
+  validacionActualizarReserva
 } = require("../validators/reservation.validators");
 
 const router = express.Router();
@@ -34,6 +37,24 @@ router.patch(
   validacionEstadoReserva,
   manejarErroresValidacion,
   updateReservationStatus
+);
+
+router.patch(
+  "/:id",
+  protect,
+  adminOnly,
+  validacionActualizarReserva,
+  manejarErroresValidacion,
+  updateReservation
+);
+
+router.delete(
+  "/:id",
+  protect,
+  adminOnly,
+  validacionIdReserva,
+  manejarErroresValidacion,
+  deleteReservation
 );
 
 module.exports = router;

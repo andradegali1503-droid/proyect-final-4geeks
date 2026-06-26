@@ -5,14 +5,14 @@ function Navbar() {
   const { usuario, cerrarSesion, esAdmin } = useAuth();
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-cine sticky-top">
       <div className="container py-2">
-        <Link className="navbar-brand fw-bold" to="/">
+        <Link className="navbar-brand navbar-cine__brand fw-bold" to="/">
           MesaClick
         </Link>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler navbar-cine__toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#menuPrincipal"
@@ -21,7 +21,7 @@ function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse" id="menuPrincipal">
-          <div className="navbar-nav me-auto">
+          <div className="navbar-nav me-auto navbar-cine__links">
             <NavLink className="nav-link" to="/">
               Inicio
             </NavLink>
@@ -48,20 +48,20 @@ function Navbar() {
             )}
           </div>
 
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 navbar-cine__actions">
             {usuario ? (
               <>
                 <span className="navbar-text">Hola, {usuario.name}</span>
-                <button className="btn btn-outline-dark btn-sm" onClick={cerrarSesion}>
+                <button className="btn btn-outline-light btn-sm" onClick={cerrarSesion}>
                   Salir
                 </button>
               </>
             ) : (
               <>
-                <Link className="btn btn-outline-dark btn-sm" to="/login">
+                <Link className="btn btn-outline-light btn-sm" to="/login">
                   Login
                 </Link>
-                <Link className="btn btn-dark btn-sm" to="/registro">
+                <Link className="btn btn-gold btn-sm" to="/registro">
                   Registro
                 </Link>
               </>

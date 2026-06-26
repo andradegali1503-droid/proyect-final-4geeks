@@ -24,3 +24,13 @@ export async function cambiarEstadoReserva(idReserva, status) {
   const respuesta = await api.patch(`/reservations/${idReserva}/status`, { status });
   return respuesta.data;
 }
+
+export async function actualizarReservaAdmin(idReserva, datosReserva) {
+  const respuesta = await api.patch(`/reservations/${idReserva}`, datosReserva);
+  return respuesta.data;
+}
+
+export async function eliminarReservaAdmin(idReserva) {
+  const respuesta = await api.delete(`/reservations/${idReserva}`);
+  return respuesta.data;
+}
