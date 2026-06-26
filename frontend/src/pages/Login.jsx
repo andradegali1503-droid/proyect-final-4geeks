@@ -26,8 +26,20 @@ function Login() {
       await iniciarSesion(datosFormulario);
       navigate("/");
     } catch (error) {
-      console.error("Error al iniciar sesion:", error.response?.data || error.message);
-      setMensajeError(error.response?.data?.message || "No se pudo iniciar sesion");
+      const errorBackend = error.response?.data;
+
+      console.error("Error al iniciar sesion:", {
+        status: error.response?.status,
+        mensaje: errorBackend?.message || error.message,
+        detalle: errorBackend?.detalle,
+        errores: errorBackend?.errors
+      });
+
+      setMensajeError(
+        errorBackend?.message ||
+          errorBackend?.detalle ||
+          "No se pudo iniciar sesion. Revisa el email, la password o el backend desplegado."
+      );
     }
   };
 
