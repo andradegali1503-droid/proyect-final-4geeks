@@ -1,4 +1,16 @@
+@font-face {
+  font-family: "Voga";
+  src:
+    local("Voga Medium"),
+    local("Voga");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
+  --fuente-principal: "Voga", Georgia, "Times New Roman", serif;
+  --bs-body-font-family: var(--fuente-principal);
   --color-fondo: #0d0c0b;
   --color-fondo-suave: rgba(17, 16, 15, 0.78);
   --color-fondo-tarjeta: rgba(24, 22, 20, 0.9);
@@ -16,8 +28,15 @@ body {
     radial-gradient(circle at top, rgba(140, 90, 60, 0.35) 0%, transparent 35%),
     linear-gradient(180deg, #0d0c0b 0%, #161311 50%, #0c0b0a 100%);
   color: var(--color-texto);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--fuente-principal);
   overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 a {
