@@ -1,75 +1,105 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Sparkles, CalendarCheck, Shield, LogOut, User } from "lucide-react";
 
 function Navbar() {
   const { usuario, cerrarSesion, esAdmin } = useAuth();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-cine sticky-top">
-      <div className="container py-2">
-        <Link className="navbar-brand navbar-cine__brand fw-bold" to="/">
-          MesaClick
-        </Link>
+    <header className="navbar-floating-wrapper sticky-top">
+      <nav className="navbar navbar-expand-lg navbar-floating">
+        <div className="container-fluid px-2 px-md-3">
+          {/* Marca / Identidad */}
+          <Link className="navbar-brand d-flex align-items-center gap-2 text-decoration-none py-0" to="/">
+            <div className="d-flex flex-column">
+              <span className="navbar-floating__brand">L'ATELIER NOIR</span>
+              <span className="navbar-floating__sub">3 MICHELIN STARS</span>
+            </div>
+          </Link>
 
-        <button
-          className="navbar-toggler navbar-cine__toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#menuPrincipal"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          {/* Botón Móvil */}
+          <button
+            className="navbar-toggler navbar-toggler-luxury border-0 d-lg-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuFlotante"
+            aria-controls="menuFlotante"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
-        <div className="collapse navbar-collapse" id="menuPrincipal">
-          <div className="navbar-nav me-auto navbar-cine__links">
-            <NavLink className="nav-link" to="/">
-              Inicio
-            </NavLink>
-            <NavLink className="nav-link" to="/menu">
-              Menu
-            </NavLink>
-            <NavLink className="nav-link" to="/reviews">
-              Reviews
-            </NavLink>
-            {usuario && (
-              <>
-                <NavLink className="nav-link" to="/reservar">
-                  Reservar
+          {/* Menú de Enlaces */}
+          <div className="collapse navbar-collapse" id="menuFlotante">
+            <ul className="navbar-nav mx-auto my-2 my-lg-0 gap-1 gap-lg-1 align-items-lg-center">
+              <li className="nav-item">
+                <NavLink className="nav-link-floating" to="/">
+                  La Experiencia
                 </NavLink>
-                <NavLink className="nav-link" to="/mis-reservas">
-                  Mis reservas
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link-floating" to="/menu">
+                  Menú & Carta
                 </NavLink>
-              </>
-            )}
-            {esAdmin && (
-              <NavLink className="nav-link" to="/admin">
-                Admin
-              </NavLink>
-            )}
-          </div>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link-floating" to="/reviews">
+                  Críticas
+                </NavLink>
+              </li>
+              {usuario && (
+                <li className="nav-item">
+                  <NavLink className="nav-link-floating" to="/mis-reservas">
+                    Mis Reservas
+                  </NavLink>
+                </li>
+              )}
+              {esAdmin && (
+                <li className="nav-item">
+                  <NavLink className="nav-link-floating text-warning d-inline-flex align-items-center gap-1" to="/admin">
+                    <Shield size={13} /> Maître d'
+                  </NavLink>
+                </li>
+              )}
+            </ul>
 
-          <div className="d-flex gap-2 navbar-cine__actions">
-            {usuario ? (
-              <>
-                <span className="navbar-text">Hola, {usuario.name}</span>
-                <button className="btn btn-outline-light btn-sm" onClick={cerrarSesion}>
-                  Salir
-                </button>
-              </>
-            ) : (
-              <>
-                <Link className="btn btn-outline-light btn-sm" to="/login">
-                  Login
-                </Link>
-                <Link className="btn btn-gold btn-sm" to="/registro">
-                  Registro
-                </Link>
-              </>
-            )}
+            {/* Acciones */}
+            <div className="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+              <Link to="/reservar" className="btn-floating-reserve text-decoration-none">
+                <CalendarCheck size={14} /> Reservar Mesa
+              </Link>
+
+              {usuario ? (
+                <div className="d-flex align-items-center gap-2 ms-lg-2">
+                  <span className="floating-user-pill">
+                    <User size={13} className="text-warning" /> {usuario.name}
+                  </span>
+                  <button
+                    className="floating-logout-btn"
+                    onClick={cerrarSesion}
+                    title="Cerrar Sesión"
+                  >
+                    <LogOut size={12} />
+                  </button>
+                </div>
+              ) : (
+                <div className="d-flex align-items-center gap-2 ms-lg-2">
+                  <Link className="floating-ghost-btn text-decoration-none" to="/login">
+                    Acceso
+                  </Link>
+                  <Link className="floating-text-link text-decoration-none" to="/registro">
+                    Registro
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

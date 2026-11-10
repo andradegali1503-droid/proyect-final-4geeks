@@ -20,7 +20,7 @@ const obtenerFechaNormalizada = (valorFecha) => {
 
 const createReservation = async (req, res, next) => {
   try {
-    const { date, time, people, area } = req.body;
+    const { date, time, people, area, experience, allergies, occasion, specialRequests, tableNumber, reservationCode } = req.body;
     const fechaReserva = obtenerFechaNormalizada(date);
 
     if (!fechaReserva) {
